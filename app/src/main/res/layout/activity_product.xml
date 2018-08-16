@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductActivity">
+
+    <ScrollView
+        android:id="@+id/add_product_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/add_product_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name"
+                tools:layout_editor_absoluteX="36dp"
+                tools:layout_editor_absoluteY="29dp" />
+
+            <TextView
+                android:id="@+id/product_name_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/product_article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_article" />
+
+            <TextView
+                android:id="@+id/product_article_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_description" />
+
+            <TextView
+                android:id="@+id/product_description_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/add_product_department"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/department_name"
+                tools:layout_editor_absoluteX="47dp"
+                tools:layout_editor_absoluteY="205dp" />
+
+            <TextView
+                android:id="@+id/department_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/product_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_photo" />
+
+            <ImageView
+                android:id="@+id/product_photo_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/file_not_choosen"
+                android:scaleType="centerCrop"
+                app:srcCompat="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/product_barecode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_barecode" />
+
+            <TextView
+                android:id="@+id/product_barecode_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="200sp" />
+
+            <TextView
+                android:id="@+id/product_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_category" />
+
+            <TextView
+                android:id="@+id/product_category_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/product_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_brand" />
+
+            <TextView
+                android:id="@+id/product_brand_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

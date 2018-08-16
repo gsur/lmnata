@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">LMNata</string>
+    <string name="select_department">Выбрать отдел</string>
+    <string name="department_default">отдел</string>
+
+    <string name="add_product">Добавить товар</string>
+
+    <string name="add_product_name">Введите название товара</string>
+    <string name="add_product_article">Введите артикул товара</string>
+    <string name="add_product_description">Введите описание товара</string>
+    <string name="add_product_department">Выберете отдел</string>
+    <string name="add_product_photo">Загрузите фото товара</string>
+    <string name="add_product_barecode">Введите штрих код(первые 12 цифр)</string>
+    <string name="add_product_category">Введите категорию товара</string>
+    <string name="add_product_brand">Введите бренд товара</string>
+
+    <string name="input_name">Введите имя</string>
+    <string name="input_article">Введите артикул</string>
+    <string name="input_description">Введите описание</string>
+    <string name="add_image">Добавить изображение из галереи</string>
+    <string name="input_barecode">Введите штрих код</string>
+    <string name="input_category">Введите категорию</string>
+    <string name="input_brand">Введите бренд товара</string>
+    <string name="confirm_new_product">Добавить товар</string>
+
+    <string name="file_not_found">Файл не найден</string>
+    <string name="file_not_choosen">Файл не выбран</string>
+    <string name="product_default">товар</string>
+    <string name="description_default">описание</string>
+    <string name="article_default">артикул</string>
+    <string name="product_name">Название товара</string>
+    <string name="product_article">Артикул товара</string>
+    <string name="product_description">Описание товара</string>
+    <string name="department_name">Название отдела</string>
+    <string name="product_photo">Изображение товара</string>
+    <string name="product_barecode">Штрих код</string>
+    <string name="product_category">Категория товара</string>
+    <string name="product_brand">Бренд товара</string>
+
+    <string name="building">Строительные материалы</string>
+    <string name="design">Декор</string>
+    <string name="electrician">Электротовары</string>
+    <string name="floor">Напольные покрытия</string>
+    <string name="garden">Сад</string>
+    <string name="hardware">Скобяные изделия</string>
+    <string name="instrument">Инструменты</string>
+    <string name="joiner">Столярные изделия</string>
+    <string name="kitchen">Кухни</string>
+    <string name="light">Освещение</string>
+    <string name="paint">Краски</string>
+    <string name="sanitary">Сантехника</string>
+    <string name="storage">Хранение</string>
+    <string name="tile">Плитка</string>
+    <string name="watersupp">Водоснабжение</string>
+
+    <string name="error_departments_loading">Не могу загрузить отделы из базы</string>
+    <string name="error_products_loading">Не могу загрузить товары из базы</string>
+    <string name="error_product_insert">Не могу добавить товар в базу</string>
+    <string name="error_permissions">Ошибка прав доступа к системам устройства. Без необходимых прав приложение не сможет полностью функционировать</string>
+    <string name="error_barcode_parce">Ошибка формирования штрих кода</string>
+    <string name="error_barcode_length">Длина штрих кода должна быть равна 12 символам</string>
+    <string name="error_field_empty">Поле \"%1$s\" не должно быть пустым</string>
+</resources>
