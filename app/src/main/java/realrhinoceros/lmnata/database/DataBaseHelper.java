@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     public DataBaseHelper(Context context){
-        super(context, DB_NAME,null,6);
+        super(context, DB_NAME,null,7);
         this.context = context;
     }
 
@@ -42,7 +42,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     T_DEPARTMENTS_C_IMAGE + " TEXT)"
         );
 
-        /*db.execSQL("CREATE TABLE " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " +
                 T_PRODUCTS +
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 T_PRODUCTS_C_NAME + " TEXT, " +
@@ -54,7 +54,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 T_PRODUCTS_C_CATEGORY + " TEXT, " +
                 T_PRODUCTS_C_BRAND + " TEXT, " +
                 T_PRODUCTS_C_APPROVED + " INTEGER)"
-        );*/
+        );
 
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
                                     T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +

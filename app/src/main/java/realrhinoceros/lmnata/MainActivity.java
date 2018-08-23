@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             LinearLayout mainLayout =(LinearLayout) findViewById(R.id.mainActivityLayout);
             TextView textView = new TextView(this);
             textView.setTextColor(getApplicationContext().getResources().getColor(R.color.error));
-            textView.setTextSize(24);
+            textView.setTextSize(13);
             textView.setText(R.string.error_permissions);
             mainLayout.addView(textView, 0);
         }
