@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     public DataBaseHelper(Context context){
-        super(context, DB_NAME,null,7);
+        super(context, DB_NAME,null,8);
         this.context = context;
     }
 
@@ -61,61 +61,61 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 this.context.getResources().getString(R.string.building) + "', '" +
                 this.context.getResources().getResourceEntryName(R.drawable.ic_building_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.design) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_design_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.electrician) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_electrician_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.floor) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_floor_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.garden) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_garden_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.hardware) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_hardware_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.instrument) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_instrument_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
                 this.context.getResources().getString(R.string.joiner) + "', '" +
                 this.context.getResources().getResourceEntryName(R.drawable.ic_joiner_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.kitchen) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_kitchen_dept) + "')");
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.electrician) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_electrician_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.light) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_light_dept) + "')");
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.instrument) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_instrument_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.floor) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_floor_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.tile) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_tile_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.sanitary) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_sanitary_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.watersupp) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_watersupp_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.garden) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_garden_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.hardware) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_hardware_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
                 this.context.getResources().getString(R.string.paint) + "', '" +
                 this.context.getResources().getResourceEntryName(R.drawable.ic_paint_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
                                     T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.sanitary) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_sanitary_dept) + "')");
+                this.context.getResources().getString(R.string.design) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_design_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
+                this.context.getResources().getString(R.string.light) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_light_dept) + "')");
+        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
+                T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
                 this.context.getResources().getString(R.string.storage) + "', '" +
                 this.context.getResources().getResourceEntryName(R.drawable.ic_storage_dept) + "')");
         db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
                                     T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.tile) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_tile_dept) + "')");
-        db.execSQL("INSERT INTO " + T_DEPARTMENTS + " (" + T_DEPARTMENTS_C_NAME + ", " +
-                                    T_DEPARTMENTS_C_IMAGE + ") VALUES ('" +
-                this.context.getResources().getString(R.string.watersupp) + "', '" +
-                this.context.getResources().getResourceEntryName(R.drawable.ic_watersupp_dept) + "')");
+                this.context.getResources().getString(R.string.kitchen) + "', '" +
+                this.context.getResources().getResourceEntryName(R.drawable.ic_kitchen_dept) + "')");
 
     }
 

@@ -20,13 +20,19 @@
         <Button
             android:id="@+id/selectDepartmentBtn"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_lmnata"
+            android:layout_height="100dp"
             android:text="@string/select_department" />
 
         <Button
             android:id="@+id/addProductBtn"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_lmnata"
+            android:layout_height="100dp"
             android:text="@string/add_product" />
+
+        <Button
+            android:id="@+id/searchProductBtn"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/product_name_search_btn" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

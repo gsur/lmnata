@@ -14,7 +14,7 @@
     <string name="add_product_category">Введите категорию товара</string>
     <string name="add_product_brand">Введите бренд товара</string>
 
-    <string name="input_name">Введите имя</string>
+    <string name="input_name">Введите название</string>
     <string name="input_article">Введите артикул</string>
     <string name="input_description">Введите описание</string>
     <string name="add_image">Добавить изображение из галереи</string>
@@ -38,20 +38,20 @@
     <string name="product_brand">Бренд товара</string>
 
     <string name="building">1. Строительные материалы</string>
-    <string name="design">2. Декор</string>
+    <string name="joiner">2. Столярные изделия</string>
     <string name="electrician">3. Электротовары</string>
-    <string name="floor">4. Напольные покрытия</string>
-    <string name="garden">5. Сад</string>
-    <string name="hardware">6. Скобяные изделия</string>
-    <string name="instrument">7. Инструменты</string>
-    <string name="joiner">8. Столярные изделия</string>
-    <string name="kitchen">9. Кухни</string>
-    <string name="light">10. Освещение</string>
+    <string name="instrument">4. Инструменты</string>
+    <string name="floor">5. Напольные покрытия</string>
+    <string name="tile">6. Плитка</string>
+    <string name="sanitary">7. Сантехника</string>
+    <string name="watersupp">8. Водоснабжение</string>
+    <string name="garden">9. Сад</string>
+    <string name="hardware">10. Скобяные изделия</string>
     <string name="paint">11. Краски</string>
-    <string name="sanitary">12. Сантехника</string>
-    <string name="storage">13. Хранение</string>
-    <string name="tile">14. Плитка</string>
-    <string name="watersupp">15. Водоснабжение</string>
+    <string name="design">12. Декор</string>
+    <string name="light">13. Освещение</string>
+    <string name="storage">14. Хранение</string>
+    <string name="kitchen">15. Кухни</string>
 
     <string name="error_departments_loading">Не могу загрузить отделы из базы</string>
     <string name="error_products_loading">Не могу загрузить товары из базы</string>
@@ -60,4 +60,12 @@
     <string name="error_barcode_parce">Ошибка формирования штрих кода</string>
     <string name="error_barcode_length">Длина штрих кода должна быть равна 12 символам</string>
     <string name="error_field_empty">Поле \"%1$s\" не должно быть пустым</string>
+    <string name="category_list">Категория</string>
+    <string name="brend_list">Бренд</string>
+    <string name="uncategorized_btn">Товары без категории</string>
+    <string name="watch_uncat">Открыть список товаров без категории</string>
+    <string name="search_hint">Введите название товара</string>
+    <string name="search_btn">Поиск</string>
+    <string name="product_name_search_btn">Поиск товара по имени</string>
+    <string name="no_products_found">Товар отсутсвует</string>
 </resources>

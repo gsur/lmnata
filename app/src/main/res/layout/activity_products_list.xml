@@ -7,17 +7,68 @@
     android:layout_height="match_parent"
     tools:context=".ProductsListActivity">
 
-    <ListView
-        android:id="@+id/products_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+    <LinearLayout
+        android:id="@+id/productListLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:headerDividersEnabled="false"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/searchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search_field"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/add_product_name"
+                android:inputType="textPersonName"
+                android:paddingRight="15dp" />
+
+            <ImageButton
+                android:id="@+id/search_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="5"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_search" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/no_products_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_products_found"
+            android:textAlignment="center"
+            android:visibility="invisible" />
+
+        <ListView
+            android:id="@+id/products_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:headerDividersEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+        </ListView>
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

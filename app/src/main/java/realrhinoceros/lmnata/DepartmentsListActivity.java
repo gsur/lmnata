@@ -37,7 +37,7 @@ public class DepartmentsListActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Department item = (Department) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(DepartmentsListActivity.this, ProductsListActivity.class);
+                    Intent intent = new Intent(DepartmentsListActivity.this, BrandCategoryListActivity.class);
                     intent.putExtra("id", item.id);
                     startActivity(intent);
                 }
