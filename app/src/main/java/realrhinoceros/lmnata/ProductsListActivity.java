@@ -3,6 +3,7 @@ package realrhinoceros.lmnata;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -78,7 +79,7 @@ public class ProductsListActivity extends AppCompatActivity {
     private void setProductsList(ArrayList<Product> products, ListView listView){
         if (products.size() != 0) {
             if(noProdFound.getVisibility() == View.VISIBLE){
-                noProdFound.setVisibility(View.INVISIBLE);
+                noProdFound.setVisibility(View.GONE);
             }
             final ProductListAdapter listData = new ProductListAdapter(this,
                     R.layout.view_product,
@@ -96,10 +97,7 @@ public class ProductsListActivity extends AppCompatActivity {
             });
         }else{
             noProdFound.setVisibility(View.VISIBLE);
-            final ArrayAdapter<String> emptyData = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1,
-                    new String[] {});
-            listView.setAdapter(emptyData);
+            listView.setAdapter(null);
         }
     }
 }

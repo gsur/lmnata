@@ -1,4 +1,10 @@
 <resources>
+    <string name="app_delete">Удалить</string>
+    <string name="app_cancel">Отмена</string>
+    <string name="app_delete_msg">Подтвердите удаление товара</string>
+    <string name="delete_success_msg">Товар успешно удален</string>
+    <string name="delete_failed_msg">Ошибка удаления товара</string>
+
     <string name="app_name">LMNata</string>
     <string name="select_department">Выбрать отдел</string>
     <string name="department_default">отдел</string>
@@ -68,4 +74,5 @@
     <string name="search_btn">Поиск</string>
     <string name="product_name_search_btn">Поиск товара по имени</string>
     <string name="no_products_found">Товар отсутсвует</string>
+    <string name="empty_value" />
 </resources>

@@ -81,10 +81,11 @@
 
             <ImageView
                 android:id="@+id/product_photo_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center"
                 android:contentDescription="@string/file_not_choosen"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 app:srcCompat="@android:color/transparent" />
 
             <TextView
