@@ -105,74 +105,55 @@ public class Products {
         return setProductList(cursor);
     }
 
+    public ArrayList<Product> getProducts() {
+        String query = "SELECT * FROM " + this.table;
+        return mainQuery(query, null);
+    }
+
     public ArrayList<Product> getProductsFromName(String name) {
         String query = "SELECT * FROM " + this.table + " WHERE " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
         String[] params = new String[] {name};
+
         return mainQuery(query, params);
     }
 
-    public ArrayList<Product> getProductsFromDepartment(int department_id, String name) {
+    public ArrayList<Product> getProductsFromDepartment(int department_id) {
         String query = "SELECT * FROM " + this.table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=?";
-        String[] params = null;
-        if(name.length() != 0){
-            query += " AND " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
-            params = new String[] {Integer.toString(department_id), name};
-        }else{
-            params = new String[] {Integer.toString(department_id)};
-        }
+        String[] params = new String[] {Integer.toString(department_id)};
+
         return mainQuery(query, params);
     }
 
-    public ArrayList<Product> getProductsFromCategory(int department_id, String category, String name) {
+    public ArrayList<Product> getProductsFromCategory(int department_id, String category) {
         String query = "SELECT * FROM " + this.table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? AND " +
                 DataBaseHelper.T_PRODUCTS_C_CATEGORY + "=?";
-        String[] params = null;
-        if(name.length() != 0){
-            query += " AND " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
-            params = new String[] {Integer.toString(department_id), category, name};
-        }else{
-            params = new String[] {Integer.toString(department_id), category};
-        }
+        String[] params = new String[] {Integer.toString(department_id), category};
+
         return mainQuery(query, params);
     }
 
-    public ArrayList<Product> getProductsFromBrand(int department_id, String brand, String name) {
+    public ArrayList<Product> getProductsFromBrand(int department_id, String brand) {
         String query = "SELECT * FROM " + this.table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? AND " +
                 DataBaseHelper.T_PRODUCTS_C_BRAND + "=?";
-        String[] params = null;
-        if(name.length() != 0){
-            query += " AND " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
-            params = new String[] {Integer.toString(department_id), brand, name};
-        }else{
-            params = new String[] {Integer.toString(department_id), brand};
-        }
+        String[] params = new String[] {Integer.toString(department_id), brand};
+
         return mainQuery(query, params);
     }
 
-    public ArrayList<Product> getProductsFromUncategorized(int department_id, String name) {
+    public ArrayList<Product> getProductsFromUncategorized(int department_id) {
         String query = "SELECT * FROM " + this.table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? AND " +
                 DataBaseHelper.T_PRODUCTS_C_CATEGORY + "=? AND " +
                 DataBaseHelper.T_PRODUCTS_C_BRAND + "=?";
-        String[] params = null;
-        if(name.length() != 0){
-            query += " AND " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
-            params = new String[] {Integer.toString(department_id), "", "", name};
-        }else{
-            params = new String[] {Integer.toString(department_id), "", ""};
-        }
+        String[] params = new String[] {Integer.toString(department_id), "", ""};
+
         return mainQuery(query, params);
     }
 
     public ArrayList<String> getCategories(int department_id) {
-        /*Cursor cursor = this.db.query(this.table, new String[] {DataBaseHelper.T_PRODUCTS_C_CATEGORY},
-                DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID, new String[] {Integer.toString(department_id)},
-                DataBaseHelper.T_PRODUCTS_C_CATEGORY,
-                null,
-                DataBaseHelper.T_PRODUCTS_C_CATEGORY + " ASC");*/
         Cursor cursor = this.db.rawQuery("SELECT " + DataBaseHelper.T_PRODUCTS_C_CATEGORY +
                                             " FROM " + this.table + " WHERE " +
                                             DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? " +
@@ -189,11 +170,6 @@ public class Products {
     }
 
     public ArrayList<String> getBrands(int department_id) {
-        /*Cursor cursor = this.db.query(this.table, new String[] {DataBaseHelper.T_PRODUCTS_C_BRAND},
-                DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID, new String[] {Integer.toString(department_id)},
-                DataBaseHelper.T_PRODUCTS_C_BRAND,
-                null,
-                DataBaseHelper.T_PRODUCTS_C_BRAND + " ASC");*/
         Cursor cursor = this.db.rawQuery("SELECT " + DataBaseHelper.T_PRODUCTS_C_BRAND +
                         " FROM " + this.table + " WHERE " +
                         DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? " +
