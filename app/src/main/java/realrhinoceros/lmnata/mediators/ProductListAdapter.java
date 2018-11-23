@@ -76,7 +76,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
                         }else{
                             Toast.makeText(context, R.string.delete_failed_msg, Toast.LENGTH_SHORT).show();
                         }
-                        db.dbClose();
+                        db.close();
                         remove(product);
                         notifyDataSetChanged();
                     }

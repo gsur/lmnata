@@ -9,8 +9,8 @@ public class Product {
     public String barecode = "";
     public String description = "";
     public int department_id = -1;
-    public String category = "";
-    public String brand = "";
+    public int category_id = -1;
+    public int brand_id = -1;
     public int approved = 0;
 
     public Product() {

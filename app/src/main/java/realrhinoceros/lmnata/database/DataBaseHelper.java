@@ -15,6 +15,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String T_DEPARTMENTS_C_NAME = "name";
     public static final String T_DEPARTMENTS_C_IMAGE = "image";
 
+    public static final String T_BRANDS = "brands";
+    //public static final String T_BRAND_C_ID = "p_id";
+    public static final String T_BRANDS_C_DEPARTMENT_ID = "department_id";
+    public static final String T_BRANDS_C_NAME = "name";
+
+    public static final String T_CATEGORIES = "categories";
+    //public static final String T_CATEGORY_C_ID = "p_id";
+    public static final String T_CATEGORIES_C_DEPARTMENT_ID = "department_id";
+    public static final String T_CATEGORIES_C_BRAND_ID = "brand_id";
+    public static final String T_CATEGORIES_C_NAME = "name";
+
     public static final String T_PRODUCTS = "products";
     //public static final String T_PRODUCTS_C_ID = "p_id";
     public static final String T_PRODUCTS_C_NAME = "name";
@@ -23,23 +34,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String T_PRODUCTS_C_BARCODE = "barecode";
     public static final String T_PRODUCTS_C_DESCRIPTION = "description";
     public static final String T_PRODUCTS_C_DEPARTMENT_ID = "department_id";
-    public static final String T_PRODUCTS_C_CATEGORY = "category";
-    public static final String T_PRODUCTS_C_BRAND = "brand";
+    //public static final String T_PRODUCTS_C_BRAND = "brand";
+    public static final String T_PRODUCTS_C_BRAND_ID = "brand_id";
+    //public static final String T_PRODUCTS_C_CATEGORY = "category";
+    public static final String T_PRODUCTS_C_CATEGORY_ID = "category_id";
     public static final String T_PRODUCTS_C_APPROVED = "approved";
 
     private Context context;
 
     public DataBaseHelper(Context context){
-        super(context, DB_NAME,null,8);
+        super(context, DB_NAME,null,12);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + T_DEPARTMENTS +
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DEPARTMENTS +
                     "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     T_DEPARTMENTS_C_NAME + " TEXT, " +
                     T_DEPARTMENTS_C_IMAGE + " TEXT)"
+        );
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_BRANDS +
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                T_BRANDS_C_DEPARTMENT_ID + " INTEGER, " +
+                T_BRANDS_C_NAME + " TEXT)"
+        );
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_CATEGORIES +
+                "(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                T_CATEGORIES_C_DEPARTMENT_ID + " INTEGER, " +
+                T_CATEGORIES_C_BRAND_ID + " INTEGER, " +
+                T_CATEGORIES_C_NAME + " TEXT)"
         );
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " +
@@ -51,8 +77,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 T_PRODUCTS_C_BARCODE + " TEXT, " +
                 T_PRODUCTS_C_DESCRIPTION + " TEXT, " +
                 T_PRODUCTS_C_DEPARTMENT_ID + " INTEGER, " +
-                T_PRODUCTS_C_CATEGORY + " TEXT, " +
-                T_PRODUCTS_C_BRAND + " TEXT, " +
+                T_PRODUCTS_C_BRAND_ID + " INTEGER, " +
+                T_PRODUCTS_C_CATEGORY_ID + " INTEGER, " +
                 T_PRODUCTS_C_APPROVED + " INTEGER)"
         );
 
@@ -117,12 +143,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 this.context.getResources().getString(R.string.kitchen) + "', '" +
                 this.context.getResources().getResourceEntryName(R.drawable.ic_kitchen_dept) + "')");
 
+        for (int i = 0; i < 15; i++){
+            db.execSQL("INSERT INTO " + T_BRANDS + " (" + T_BRANDS_C_DEPARTMENT_ID + ", " +
+                    T_BRANDS_C_NAME + ") VALUES ('" + i + "', '" +
+                    this.context.getResources().getString(R.string.no_brand) + "')");
+            db.execSQL("INSERT INTO " + T_CATEGORIES + " (" + T_CATEGORIES_C_DEPARTMENT_ID + ", " +
+                    T_CATEGORIES_C_BRAND_ID + ", " + T_CATEGORIES_C_NAME + ") " +
+                    "VALUES ('" + i + "', '" + i + "', '" +
+                    this.context.getResources().getString(R.string.no_category) + "')");
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + T_DEPARTMENTS);
-        //db.execSQL("DROP TABLE IF EXISTS " + T_PRODUCTS);
+        db.execSQL("DROP TABLE IF EXISTS " + T_PRODUCTS);
+        db.execSQL("DROP TABLE IF EXISTS " + T_BRANDS);
+        db.execSQL("DROP TABLE IF EXISTS " + T_CATEGORIES);
 
         onCreate(db);
     }

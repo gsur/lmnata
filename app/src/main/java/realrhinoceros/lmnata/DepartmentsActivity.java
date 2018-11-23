@@ -19,7 +19,7 @@ public class DepartmentsActivity extends AppCompatActivity {
 
         Departments db = new Departments(getApplicationContext());
         ArrayList<Department> departments = db.getDepartments();
-        db.dbClose();
+        db.close();
 
         LinearLayout departmentsContainer = (LinearLayout) findViewById(R.id.departments_list);
 

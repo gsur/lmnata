@@ -27,9 +27,9 @@ public class BrandCategoryListActivity extends AppCompatActivity {
         department_id = getIntent().getExtras().getInt("id");
 
         Products db = new Products(getApplicationContext());
-        ArrayList<String> categories = db.getCategories(department_id);
-        ArrayList<String> brands = db.getBrands(department_id);
-        db.dbClose();
+        ArrayList<String> categories = new ArrayList();// = db.getCategories(department_id);
+        ArrayList<String> brands = new ArrayList();// = db.getBrands(department_id);
+        db.close();
 
         ListView catListView = (ListView) findViewById(R.id.category_list);
 

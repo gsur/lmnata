@@ -2,37 +2,33 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainLayout"
+    android:id="@+id/add_activity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AddActivity">
 
     <LinearLayout
-        android:id="@+id/mainActivityLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/add_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
-            android:id="@+id/selectDepartmentBtn"
+            android:id="@+id/addProductBtn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="@string/select_department" />
+            android:text="@string/add_product" />
 
         <Button
-            android:id="@+id/addBtn"
+            android:id="@+id/addBrandBtn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="@string/app_add" />
+            android:text="@string/add_brand" />
 
         <Button
-            android:id="@+id/searchProductBtn"
+            android:id="@+id/addCategoryBtn"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:text="@string/product_name_search_btn" />
+            android:text="@string/add_category" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -23,7 +23,7 @@ public class DepartmentsListActivity extends AppCompatActivity {
 
         Departments db = new Departments(getApplicationContext());
         ArrayList<Department> departments = db.getDepartments();
-        db.dbClose();
+        db.close();
 
         if (departments.size() != 0) {
             ListView listView = (ListView) findViewById(R.id.departments_list);
@@ -37,7 +37,7 @@ public class DepartmentsListActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Department item = (Department) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(DepartmentsListActivity.this, BrandCategoryListActivity.class);
+                    Intent intent = new Intent(DepartmentsListActivity.this, BrandsListActivity.class);
                     intent.putExtra("id", item.id);
                     startActivity(intent);
                 }

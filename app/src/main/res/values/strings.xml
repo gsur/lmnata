@@ -1,5 +1,6 @@
 <resources>
     <string name="app_delete">Удалить</string>
+    <string name="app_add">Добавить</string>
     <string name="app_cancel">Отмена</string>
     <string name="app_delete_msg">Подтвердите удаление товара</string>
     <string name="delete_success_msg">Товар успешно удален</string>
@@ -14,7 +15,7 @@
     <string name="add_product_name">Введите название товара</string>
     <string name="add_product_article">Введите артикул товара</string>
     <string name="add_product_description">Введите описание товара</string>
-    <string name="add_product_department">Выберете отдел</string>
+    <string name="add_product_department">Выберите отдел</string>
     <string name="add_product_photo">Загрузите фото товара</string>
     <string name="add_product_barecode">Введите штрих код(первые 12 цифр)</string>
     <string name="add_product_category">Введите категорию товара</string>
@@ -27,6 +28,8 @@
     <string name="input_barecode">Введите штрих код</string>
     <string name="input_category">Введите категорию</string>
     <string name="input_brand">Введите бренд товара</string>
+    <string name="add_new_brand">Добавить бренд</string>
+    <string name="add_new_category">Добавить категорию</string>
     <string name="confirm_new_product">Добавить товар</string>
 
     <string name="file_not_found">Файл не найден</string>
@@ -60,6 +63,8 @@
     <string name="kitchen">15. Кухни</string>
 
     <string name="error_departments_loading">Не могу загрузить отделы из базы</string>
+    <string name="error_brands_loading">Не могу загрузить бренды из базы</string>
+    <string name="error_categories_loading">Не могу загрузить категории из базы</string>
     <string name="error_products_loading">Не могу загрузить товары из базы</string>
     <string name="error_product_insert">Не могу добавить товар в базу</string>
     <string name="error_permissions">Ошибка прав доступа к системам устройства. Без необходимых прав приложение не сможет полностью функционировать. Если права были выданы, это сообщение исчезнет при следующем запуске приложения.</string>
@@ -75,4 +80,14 @@
     <string name="product_name_search_btn">Поиск товара по имени</string>
     <string name="no_products_found">Товар отсутсвует</string>
     <string name="empty_value" />
+    <string name="no_brand">Без бренда</string>
+    <string name="no_category">Без категории</string>
+    <string name="choose_category">Выберите категорию</string>
+    <string name="add_brand">Добавить бренд</string>
+    <string name="add_category">Добавить категорию</string>
+    <string name="add_brand_name">Введите имя бренда</string>
+    <string name="brand_list">Список брендов</string>
+    <string name="add_category_name">Введите имя категории</string>
+    <string name="category">Список категорий</string>
+    <string name="add_brand_choose">Выберите бренд</string>
 </resources>

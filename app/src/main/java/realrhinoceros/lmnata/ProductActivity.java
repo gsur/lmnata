@@ -12,10 +12,14 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import realrhinoceros.lmnata.database.Brands;
+import realrhinoceros.lmnata.database.Categories;
 import realrhinoceros.lmnata.database.Departments;
 import realrhinoceros.lmnata.database.Products;
 import realrhinoceros.lmnata.helpers.EAN13CodeBuilder;
 import realrhinoceros.lmnata.helpers.UriToBitmap;
+import realrhinoceros.lmnata.mediators.Brand;
+import realrhinoceros.lmnata.mediators.Category;
 import realrhinoceros.lmnata.mediators.Department;
 import realrhinoceros.lmnata.mediators.Product;
 
@@ -30,6 +34,9 @@ public class ProductActivity extends AppCompatActivity {
     ImageView imageView;
 
     Product product;
+    Department department;
+    Brand brand;
+    Category category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +53,34 @@ public class ProductActivity extends AppCompatActivity {
         categoryField = (TextView) findViewById(R.id.product_category_field);
         brandField = (TextView) findViewById(R.id.product_brand_field);
 
+        setProduct();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setProduct();
+    }
+
+    protected void setProduct(){
         int product_id = getIntent().getExtras().getInt("id");
 
         Products dbProd = new Products(getApplicationContext());
-        Product product = dbProd.getProduct(product_id);
-        dbProd.dbClose();
+        product = dbProd.getProduct(product_id);
+        dbProd.close();
 
         if(product.id != -1) {
             Departments dbDept = new Departments(getApplicationContext());
-            Department department = dbDept.getDepartment(product.department_id);
-            dbDept.dbClose();
+            department = dbDept.getDepartment(product.department_id);
+            dbDept.close();
+
+            Brands dbBrand = new Brands(getApplicationContext());
+            brand = dbBrand.getBrand(product.brand_id);
+            dbBrand.close();
+
+            Categories dbCat = new Categories(getApplicationContext());
+            category = dbCat.getCategory(product.category_id);
+            dbCat.close();
 
             nameField.setText(product.name);
             articleField.setText(product.article);
@@ -65,18 +90,25 @@ public class ProductActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), R.string.error_departments_loading, Toast.LENGTH_LONG).show();
             }
+            if (Integer.valueOf(brand.id) != -1) {
+                brandField.setText(brand.name);
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.error_brands_loading, Toast.LENGTH_LONG).show();
+            }
+            if (Integer.valueOf(category.id) != -1) {
+                categoryField.setText(category.name);
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.error_categories_loading, Toast.LENGTH_LONG).show();
+            }
             UriToBitmap.parse(this, Uri.parse(product.image), imageView);
             if (product.barecode.length() == 12) {
                 barecodeField.setText(new EAN13CodeBuilder(product.barecode).getCode());
             } else {
                 Toast.makeText(getApplicationContext(), R.string.error_barcode_parce, Toast.LENGTH_LONG).show();
             }
-            categoryField.setText(product.category);
-            brandField.setText(product.brand);
         }else{
             Toast.makeText(getApplicationContext(), R.string.error_products_loading, Toast.LENGTH_LONG).show();
             finish();
         }
-
     }
 }

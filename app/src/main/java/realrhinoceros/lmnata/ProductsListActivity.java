@@ -37,6 +37,8 @@ public class ProductsListActivity extends AppCompatActivity {
     protected TextView noProdFound;
 
     Bundle extras;
+    ArrayList<Product> products;
+    int category_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +52,16 @@ public class ProductsListActivity extends AppCompatActivity {
 
         noProdFound = (TextView) findViewById(R.id.no_products_field);
 
-        extras = getIntent().getExtras();
-
-        setProducts(extras);
+        setCategoryId();
+        setDBProducts();
+        setProducts(products);
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hideSoftKeyboard(ProductsListActivity.this, searchField);
                 searchField.clearFocus();
-                setProducts(extras);
+                setProducts(products);
             }
         });
 
@@ -81,7 +83,7 @@ public class ProductsListActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setProducts(extras);
+                setProducts(products);
             }
 
             @Override
@@ -103,35 +105,26 @@ public class ProductsListActivity extends AppCompatActivity {
         });
     }
 
-    protected void setProducts(Bundle extras){
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        setDBProducts();
+        setProducts(products);
+    }
+
+    protected void setCategoryId(){
+        category_id = getIntent().getExtras().getInt("id");
+    }
+
+    protected void setDBProducts(){
+        Products db = new Products(getApplicationContext());
+        products = db.getProducts(category_id);
+        db.close();
+    }
+
+    protected void setProducts(ArrayList<Product> products){
         if(!searchFieldEmpty()){
-            ArrayList<Product> products;
-            Products db = new Products(getApplicationContext());
-
-            try {
-                String selector = extras.getString("selector");
-                int department_id = extras.getInt("id");
-                switch (selector) {
-                    case "category":
-                        products = db.getProductsFromCategory(department_id, extras.getString("item"));
-                        break;
-                    case "brand":
-                        products = db.getProductsFromBrand(department_id, extras.getString("item"));
-                        break;
-                    case "none":
-                        products = db.getProductsFromUncategorized(department_id);
-                        break;
-
-                    default:
-                        products = db.getProducts();
-                        break;
-                }
-            }catch (NullPointerException e){
-                products = db.getProducts();
-            }finally {
-                db.dbClose();
-            }
-
             products = ProductSearch.filter(products, searchField.getText().toString());
 
             if (products.size() > 0) {

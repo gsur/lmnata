@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Button selectDepartmentBtn = (Button) findViewById(R.id.selectDepartmentBtn);
-        Button addProductBtn = (Button) findViewById(R.id.addProductBtn);
+        Button addBtn = (Button) findViewById(R.id.addBtn);
         Button searchBtn = (Button) findViewById(R.id.searchProductBtn);
 
         selectDepartmentBtn.setOnClickListener(new View.OnClickListener() {
@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        addProductBtn.setOnClickListener(new View.OnClickListener() {
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
             }
         });

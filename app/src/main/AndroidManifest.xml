@@ -26,6 +26,11 @@
         <activity android:name=".ProductActivity" />
         <activity android:name=".BrandCategoryListActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".BrandsListActivity" />
+        <activity android:name=".CategoriesListActivity" />
+        <activity android:name=".AddActivity" />
+        <activity android:name=".AddBrandActivity" />
+        <activity android:name=".AddCategoryActivity"></activity>
     </application>
 
 </manifest>

@@ -9,19 +9,17 @@ import android.database.sqlite.SQLiteException;
 import java.util.ArrayList;
 import realrhinoceros.lmnata.mediators.Product;
 
-public class Products {
-    protected SQLiteDatabase db;
+public class Products extends DataBaseMiddleware{
     protected final String table = DataBaseHelper.T_PRODUCTS;
 
     public Products(Context context) {
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        super(context);
+    }
 
-        try {
-            this.db = dataBaseHelper.getWritableDatabase();
-        }
-        catch (SQLiteException e){
-            this.db = dataBaseHelper.getReadableDatabase();
-        }
+    private ArrayList<Product> mainQuery(String query, String[] queryParams){
+        Cursor cursor = db.rawQuery(query, queryParams);
+
+        return setProductList(cursor);
     }
 
     private ContentValues getCV(Product product) {
@@ -33,8 +31,8 @@ public class Products {
         productCV.put(DataBaseHelper.T_PRODUCTS_C_BARCODE, product.barecode);
         productCV.put(DataBaseHelper.T_PRODUCTS_C_DESCRIPTION, product.description);
         productCV.put(DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID, product.department_id);
-        productCV.put(DataBaseHelper.T_PRODUCTS_C_CATEGORY, product.category);
-        productCV.put(DataBaseHelper.T_PRODUCTS_C_BRAND, product.brand);
+        productCV.put(DataBaseHelper.T_PRODUCTS_C_CATEGORY_ID, product.category_id);
+        productCV.put(DataBaseHelper.T_PRODUCTS_C_BRAND_ID, product.brand_id);
         productCV.put(DataBaseHelper.T_PRODUCTS_C_APPROVED, product.approved);
 
         return productCV;
@@ -51,29 +49,11 @@ public class Products {
         product.barecode = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BARCODE));
         product.description = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_DESCRIPTION));
         product.department_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID));
-        product.category = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_CATEGORY));
-        product.brand = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BRAND));
+        product.category_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_CATEGORY_ID));
+        product.brand_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BRAND_ID));
         product.approved = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_APPROVED));
 
         return product;
-    }
-
-    public long insertProduct(Product product) {
-        return this.db.insert(this.table, null, this.getCV(product));
-    }
-
-    public int updateProduct(Product product) {
-        return this.db.update(this.table, this.getCV(product), "_id=?", new String[]{String.valueOf(product.id)});
-    }
-
-    public int deleteProduct(int id) {
-        return this.db.delete(this.table, "_id=?", new String[]{Integer.toString(id)});
-    }
-
-    public Product getProduct(int id) {
-        Cursor cursor = this.db.rawQuery("SELECT * FROM " + this.table + " WHERE _id=?", new String[]{Integer.toString(id)});
-
-        return setProduct(cursor);
     }
 
     private ArrayList<Product> setProductList(Cursor cursor){
@@ -89,8 +69,8 @@ public class Products {
             product.barecode = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BARCODE));
             product.description = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_DESCRIPTION));
             product.department_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID));
-            product.category = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_CATEGORY));
-            product.brand = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BRAND));
+            product.category_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_CATEGORY_ID));
+            product.brand_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BRAND_ID));
             product.approved = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_APPROVED));
 
             products.add(product);
@@ -99,93 +79,67 @@ public class Products {
         return products;
     }
 
-    private ArrayList<Product> mainQuery(String query, String[] queryParams){
-        Cursor cursor = db.rawQuery(query, queryParams);
-
-        return setProductList(cursor);
+    public long insertProduct(Product product) {
+        return db.insert(table, null, getCV(product));
     }
 
-    public ArrayList<Product> getProducts() {
-        String query = "SELECT * FROM " + this.table;
+    public int updateProduct(Product product) {
+        return db.update(table, getCV(product), "_id=?", new String[]{String.valueOf(product.id)});
+    }
+
+    public int deleteProduct(int id) {
+        return db.delete(table, "_id=?", new String[]{Integer.toString(id)});
+    }
+
+    public Product getProduct(int id) {
+        Cursor cursor = db.rawQuery("SELECT * FROM " + table + " WHERE _id=?", new String[]{Integer.toString(id)});
+
+        return setProduct(cursor);
+    }
+
+    public ArrayList<Product> getAllProducts() {
+        String query = "SELECT * FROM " + table;
+
         return mainQuery(query, null);
     }
 
+    public ArrayList<Product> getProducts(int category_id) {
+        String query = "SELECT * FROM " + table + " WHERE " + DataBaseHelper.T_PRODUCTS_C_CATEGORY_ID + "=?";
+        String[] params = new String[] {Integer.toString(category_id)};
+
+        return mainQuery(query, params);
+    }
+
     public ArrayList<Product> getProductsFromName(String name) {
-        String query = "SELECT * FROM " + this.table + " WHERE " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
+        String query = "SELECT * FROM " + table + " WHERE " + DataBaseHelper.T_PRODUCTS_C_NAME + "=?";
         String[] params = new String[] {name};
 
         return mainQuery(query, params);
     }
 
     public ArrayList<Product> getProductsFromDepartment(int department_id) {
-        String query = "SELECT * FROM " + this.table + " WHERE " +
+        String query = "SELECT * FROM " + table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=?";
         String[] params = new String[] {Integer.toString(department_id)};
 
         return mainQuery(query, params);
     }
 
-    public ArrayList<Product> getProductsFromCategory(int department_id, String category) {
-        String query = "SELECT * FROM " + this.table + " WHERE " +
+    public ArrayList<Product> getProductsFromCategory(int department_id, String category_id) {
+        String query = "SELECT * FROM " + table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? AND " +
-                DataBaseHelper.T_PRODUCTS_C_CATEGORY + "=?";
-        String[] params = new String[] {Integer.toString(department_id), category};
+                DataBaseHelper.T_PRODUCTS_C_CATEGORY_ID + "=?";
+        String[] params = new String[] {Integer.toString(department_id), category_id};
 
         return mainQuery(query, params);
     }
 
-    public ArrayList<Product> getProductsFromBrand(int department_id, String brand) {
-        String query = "SELECT * FROM " + this.table + " WHERE " +
+    public ArrayList<Product> getProductsFromBrand(int department_id, String brand_id) {
+        String query = "SELECT * FROM " + table + " WHERE " +
                 DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? AND " +
-                DataBaseHelper.T_PRODUCTS_C_BRAND + "=?";
-        String[] params = new String[] {Integer.toString(department_id), brand};
+                DataBaseHelper.T_PRODUCTS_C_BRAND_ID + "=?";
+        String[] params = new String[] {Integer.toString(department_id), brand_id};
 
         return mainQuery(query, params);
-    }
-
-    public ArrayList<Product> getProductsFromUncategorized(int department_id) {
-        String query = "SELECT * FROM " + this.table + " WHERE " +
-                DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? AND " +
-                DataBaseHelper.T_PRODUCTS_C_CATEGORY + "=? AND " +
-                DataBaseHelper.T_PRODUCTS_C_BRAND + "=?";
-        String[] params = new String[] {Integer.toString(department_id), "", ""};
-
-        return mainQuery(query, params);
-    }
-
-    public ArrayList<String> getCategories(int department_id) {
-        Cursor cursor = this.db.rawQuery("SELECT " + DataBaseHelper.T_PRODUCTS_C_CATEGORY +
-                                            " FROM " + this.table + " WHERE " +
-                                            DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? " +
-                                            "GROUP BY " + DataBaseHelper.T_PRODUCTS_C_CATEGORY + " ORDER BY " +
-                                            DataBaseHelper.T_PRODUCTS_C_CATEGORY + " ASC",
-                new String[] {Integer.toString(department_id)});
-        ArrayList<String> categories = new ArrayList<String>();
-
-        while (cursor.moveToNext()) {
-            categories.add(cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_CATEGORY)));
-        }
-
-        return categories;
-    }
-
-    public ArrayList<String> getBrands(int department_id) {
-        Cursor cursor = this.db.rawQuery("SELECT " + DataBaseHelper.T_PRODUCTS_C_BRAND +
-                        " FROM " + this.table + " WHERE " +
-                        DataBaseHelper.T_PRODUCTS_C_DEPARTMENT_ID + "=? " +
-                        "GROUP BY " + DataBaseHelper.T_PRODUCTS_C_BRAND + " ORDER BY " +
-                        DataBaseHelper.T_PRODUCTS_C_BRAND + " ASC",
-                new String[] {Integer.toString(department_id)});
-        ArrayList<String> brands = new ArrayList<String>();
-
-        while (cursor.moveToNext()) {
-            brands.add(cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_PRODUCTS_C_BRAND)));
-        }
-
-        return brands;
-    }
-
-    public void dbClose() {
-        this.db.close();
     }
 }
