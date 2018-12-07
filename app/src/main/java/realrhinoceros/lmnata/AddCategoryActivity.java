@@ -122,7 +122,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Brand item = (Brand) brandSpinner.getSelectedItem();
-        setCategories(item.id);
+        setCategoryAdapter(item.id);
     }
 
     protected int setCategoryAdapter(int brand_id){

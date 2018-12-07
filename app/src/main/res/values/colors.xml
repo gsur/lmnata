@@ -6,4 +6,5 @@
     <color name="department_default">#419a2d</color>
     <color name="product_default">#419c2d</color>
     <color name="error">#b21017</color>
+    <color name="light_gray">#e4e4e4</color>
 </resources>

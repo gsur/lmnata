@@ -57,6 +57,7 @@
         android:focusableInTouchMode="false"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:src="@drawable/ic_delete" />
+        android:src="@drawable/ic_delete"
+        android:visibility="gone" />
 
 </RelativeLayout>

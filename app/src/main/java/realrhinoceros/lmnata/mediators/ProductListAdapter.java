@@ -44,7 +44,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         TextView textViewName = (TextView) view.findViewById(R.id.product_name);
         TextView textViewArticle = (TextView) view.findViewById(R.id.product_article);
         TextView textViewDescr = (TextView) view.findViewById(R.id.product_description);
-        ImageButton btnViewDelete = (ImageButton) view.findViewById(R.id.product_delete_btn);
+        //ImageButton btnViewDelete = (ImageButton) view.findViewById(R.id.product_delete_btn);
 
         final Product product = this.products.get(position);
 
@@ -62,7 +62,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         textViewArticle.setText(product.article);
         textViewDescr.setText(product.description);
 
-        btnViewDelete.setOnClickListener(new View.OnClickListener() {
+        /*btnViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
@@ -89,7 +89,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
                 });
                 dialog.show();
             }
-        });
+        });*/
 
         return view;
     }

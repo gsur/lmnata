@@ -31,7 +31,7 @@ public class Categories extends DataBaseMiddleware {
         cursor.moveToFirst();
         category.id = cursor.getInt(cursor.getColumnIndex("_id"));
         category.department_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_CATEGORIES_C_DEPARTMENT_ID));
-        category.department_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_CATEGORIES_C_BRAND_ID));
+        category.brand_id = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.T_CATEGORIES_C_BRAND_ID));
         category.name = cursor.getString(cursor.getColumnIndex(DataBaseHelper.T_CATEGORIES_C_NAME));
 
         return category;
@@ -47,6 +47,10 @@ public class Categories extends DataBaseMiddleware {
 
     public int deleteCategory(int id) {
         return db.delete(table, "_id=?", new String[]{Integer.toString(id)});
+    }
+
+    public int deleteCategoriesByBrand(int brand_id) {
+        return db.delete(table, "brand_id=?", new String[]{Integer.toString(brand_id)});
     }
 
     public Category getCategory(int id) {

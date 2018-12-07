@@ -91,6 +91,14 @@ public class Products extends DataBaseMiddleware{
         return db.delete(table, "_id=?", new String[]{Integer.toString(id)});
     }
 
+    public int deleteProductsByBrand(int brand_id) {
+        return db.delete(table, "brand_id=?", new String[]{Integer.toString(brand_id)});
+    }
+
+    public int deleteProductsByCategory(int category_id) {
+        return db.delete(table, "category_id=?", new String[]{Integer.toString(category_id)});
+    }
+
     public Product getProduct(int id) {
         Cursor cursor = db.rawQuery("SELECT * FROM " + table + " WHERE _id=?", new String[]{Integer.toString(id)});
 

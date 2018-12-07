@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/head_panel_layout"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:id="@+id/textSector"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/option_btn"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:id="@+id/sector_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_value"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/sector_descr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_value"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/option_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="false"
+        android:layout_toStartOf="@+id/home_btn"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/empty_value"
+        android:visibility="visible"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <ImageButton
+        android:id="@+id/home_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/empty_value"
+        app:srcCompat="@drawable/ic_home" />
+</RelativeLayout>

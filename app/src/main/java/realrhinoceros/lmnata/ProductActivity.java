@@ -1,17 +1,25 @@
 package realrhinoceros.lmnata;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 
+import realrhinoceros.lmnata.custom_views.HeadPanel;
 import realrhinoceros.lmnata.database.Brands;
 import realrhinoceros.lmnata.database.Categories;
 import realrhinoceros.lmnata.database.Departments;
@@ -37,6 +45,9 @@ public class ProductActivity extends AppCompatActivity {
     Department department;
     Brand brand;
     Category category;
+    HeadPanel headPanel;
+    Context cont;
+    int product_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +64,58 @@ public class ProductActivity extends AppCompatActivity {
         categoryField = (TextView) findViewById(R.id.product_category_field);
         brandField = (TextView) findViewById(R.id.product_brand_field);
 
+        cont = (Context) this;
+
+        LinearLayout linear = (LinearLayout) findViewById(R.id.productLinear);
+        headPanel = new HeadPanel(this, "", getString(R.string.product), this);
+
         setProduct();
+
+        PopupMenu.OnMenuItemClickListener popupListener = new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.update_item:
+                            Intent intent = new Intent(ProductActivity.this, UpdateProductActivity.class);
+                            intent.putExtra("id", product_id);
+                            startActivity(intent);
+                        return true;
+
+                    case R.id.delete_item:
+                            AlertDialog.Builder dialog = new AlertDialog.Builder(cont);
+                            dialog.setMessage(R.string.product_delete_msg);
+                            dialog.setPositiveButton(R.string.app_delete, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Products product_db = new Products(cont);
+                                    if (product_db.deleteProduct(product.id) != 0){
+                                        Toast.makeText(cont, R.string.product_delete_success_msg, Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(cont, R.string.product_delete_failed_msg, Toast.LENGTH_SHORT).show();
+                                    }
+                                    product_db.close();
+
+                                    finish();
+                                }
+                            });
+                            dialog.setNegativeButton(R.string.app_cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            dialog.show();
+                        return true;
+
+                    default:
+
+                        return false;
+                }
+            }
+        };
+        headPanel.setOptionsListener(popupListener);
+
+        linear.addView(headPanel, 0);
     }
 
     @Override
@@ -63,7 +125,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     protected void setProduct(){
-        int product_id = getIntent().getExtras().getInt("id");
+        product_id = getIntent().getExtras().getInt("id");
 
         Products dbProd = new Products(getApplicationContext());
         product = dbProd.getProduct(product_id);
@@ -106,6 +168,8 @@ public class ProductActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), R.string.error_barcode_parce, Toast.LENGTH_LONG).show();
             }
+
+            headPanel.setNameSectorText(product.name);
         }else{
             Toast.makeText(getApplicationContext(), R.string.error_products_loading, Toast.LENGTH_LONG).show();
             finish();

@@ -3,8 +3,15 @@
     <string name="app_add">Добавить</string>
     <string name="app_cancel">Отмена</string>
     <string name="app_delete_msg">Подтвердите удаление товара</string>
+    <string name="app_apply">Применить</string>
+    <string name="app_back">Верунться</string>
+    <string name="back_message">Вы действительно хотите вернуться в главное меню?</string>
     <string name="delete_success_msg">Товар успешно удален</string>
     <string name="delete_failed_msg">Ошибка удаления товара</string>
+    <string name="department">Отдел</string>
+    <string name="brand">Бренд</string>
+    <string name="category_1">Категория</string>
+    <string name="product">Товар</string>
 
     <string name="app_name">LMNata</string>
     <string name="select_department">Выбрать отдел</string>
@@ -90,4 +97,19 @@
     <string name="add_category_name">Введите имя категории</string>
     <string name="category">Список категорий</string>
     <string name="add_brand_choose">Выберите бренд</string>
+    <string name="app_update">Изменить</string>
+
+
+    <string name="brand_delete_msg">При удалении бренда так же удалятся принадлежащие ему категории и товары. Подтвердите удаление бренда</string>
+    <string name="category_delete_msg">При удалении категории так же удалятся принадлежащие ей товары. Подтвердите удаление категории</string>
+    <string name="product_delete_msg">Подтвердите удаление товара</string>
+    <string name="brand_delete_success_msg">Бренд успешно удален</string>
+    <string name="brand_delete_failed_msg">Ошибка удаления бренда</string>
+    <string name="category_delete_success_msg">Категория успешно удалена</string>
+    <string name="category_delete_failed_msg">Ошибка удаления категории</string>
+    <string name="product_delete_success_msg">Товар успешно удален</string>
+    <string name="product_delete_failed_msg">Ошибка удаления товара</string>
+
+    <string name="rename_brand">Введите новое имя бренда</string>
+    <string name="rename_category">Введите новое имя категории</string>
 </resources>

@@ -110,7 +110,7 @@ public class AddBrandActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Department item = (Department) departmentsSpinner.getSelectedItem();
-        setBrands(item.id);
+        setBrandAdapter(item.id);
     }
 
     protected int setBrandAdapter(int dept_id){

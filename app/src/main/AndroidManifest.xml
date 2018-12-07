@@ -30,7 +30,8 @@
         <activity android:name=".CategoriesListActivity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".AddBrandActivity" />
-        <activity android:name=".AddCategoryActivity"></activity>
+        <activity android:name=".AddCategoryActivity" />
+        <activity android:name=".UpdateProductActivity"></activity>
     </application>
 
 </manifest>

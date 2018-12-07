@@ -1,9 +1,6 @@
 package realrhinoceros.lmnata;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.inputmethodservice.ExtractEditText;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +29,10 @@ import realrhinoceros.lmnata.mediators.Department;
 import realrhinoceros.lmnata.mediators.DepartmentSpinnerAdapter;
 import realrhinoceros.lmnata.mediators.Product;
 
-public class AddProductActivity extends AppCompatActivity {
+import static android.view.View.GONE;
+
+public class UpdateProductActivity extends AppCompatActivity {
+
     EditText nameField;
     EditText articleField;
     EditText descriptionField;
@@ -55,8 +55,13 @@ public class AddProductActivity extends AppCompatActivity {
     BrandAdapter spinnerBrandsData;
     CategoryAdapter spinnerCategoriesData;
 
+    boolean onCreateDept = true;
+    boolean onCreateBrand = true;
+    boolean onCreateCat = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
@@ -74,67 +79,77 @@ public class AddProductActivity extends AppCompatActivity {
         confirmBtn = (Button) findViewById(R.id.add_product_confirm_btn);
 
         addBrandBtn = (ImageButton) findViewById(R.id.ap_add_brand_btn);
+            addBrandBtn.setVisibility(GONE);
         addCategoryBtn = (ImageButton) findViewById(R.id.ap_add_category_btn);
+            addCategoryBtn.setVisibility(GONE);
 
-        product = new Product();
+        Products productsDB = new Products(this);
+        product = productsDB.getProduct(getIntent().getExtras().getInt("id"));
+        productsDB.close();
 
-        Departments departmentsDB = new Departments(getApplicationContext());
-        ArrayList<Department> departments = departmentsDB.getDepartments();
-        departmentsDB.close();
+        nameField.setText(product.name);
+        articleField.setText(product.article);
+        descriptionField.setText(product.description);
+        barecodeField.setText(product.barecode);
 
-        if (departments.size() != 0){
-            final DepartmentSpinnerAdapter spinnerDeptData = new DepartmentSpinnerAdapter(this,
-                    R.layout.support_simple_spinner_dropdown_item,
-                    departments);
-            departmentsSpinner.setAdapter(spinnerDeptData);
-            product.department_id = departments.get(0).id;
-            product.brand_id = setBrandAdapter(product.department_id);
-            product.category_id = setCategoryAdapter(product.brand_id);
+        UriToBitmap.parse(this, Uri.parse(product.image), imageView);
 
-            departmentsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        departmentsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!onCreateDept){
                     Department item = (Department) parent.getSelectedItem();
                     product.department_id = item.id;
                     product.brand_id = setBrandAdapter(product.department_id);
                     product.category_id = setCategoryAdapter(product.brand_id);
                 }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
+                else{
+                    onCreateDept = false;
                 }
-            });
+            }
 
-            brandsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        brandsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!onCreateBrand){
                     Brand item = (Brand) parent.getSelectedItem();
                     product.brand_id = item.id;
                     product.category_id = setCategoryAdapter(product.brand_id);
                 }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
+                else{
+                    onCreateBrand = false;
                 }
-            });
+            }
 
-            categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!onCreateCat){
                     Category item = (Category) parent.getSelectedItem();
                     product.category_id = item.id;
                 }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
+                else{
+                    onCreateCat = false;
                 }
-            });
-        }else{
-            Toast.makeText(this, R.string.error_departments_loading, Toast.LENGTH_SHORT).show();
-        }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         addImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,102 +160,7 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-        addBrandBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddProductActivity.this);
-                builder.setTitle(R.string.add_new_brand);
-
-                final EditText addBrandNameText = new EditText(AddProductActivity.this);
-                builder.setView(addBrandNameText);
-
-                builder.setPositiveButton(R.string.app_add, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(!String.valueOf(addBrandNameText.getText()).isEmpty()){
-                            Brand brand = new Brand();
-                            brand.department_id = product.department_id;
-                            brand.name = String.valueOf(addBrandNameText.getText());
-                            Brands brandsDB = new Brands(getApplicationContext());
-                            brand.id = (int) brandsDB.insertBrand(brand);
-                            brandsDB.close();
-                            product.brand_id = brand.id;
-
-                            Category category = new Category();
-                            category.department_id = product.department_id;
-                            category.brand_id = product.brand_id;
-                            category.name = getResources().getString(R.string.no_category);
-                            Categories categoriesDB = new Categories(getApplicationContext());
-                            categoriesDB.insertCategory(category);
-                            categoriesDB.close();
-
-                            spinnerBrandsData.add(brand);
-                            spinnerBrandsData.notifyDataSetChanged();
-                            brandsSpinner.setSelection(spinnerBrandsData.getPosition(brand));
-
-                            product.category_id = setCategoryAdapter(brand.id);
-                        }
-                        else{
-                            dialog.cancel();
-                        }
-                    }
-                });
-
-                builder.setNegativeButton(R.string.app_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-            }
-        });
-
-        addCategoryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("qwe", "qwe");
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddProductActivity.this);
-                builder.setTitle(R.string.add_new_category);
-
-                final EditText addCategoryNameText = new EditText(AddProductActivity.this);
-                builder.setView(addCategoryNameText);
-
-                builder.setPositiveButton(R.string.app_add, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(!String.valueOf(addCategoryNameText.getText()).isEmpty()){
-                            Category category = new Category();
-                            category.department_id = product.department_id;
-                            category.brand_id = product.brand_id;
-                            category.name = String.valueOf(addCategoryNameText.getText());
-                            Categories categoriesDB = new Categories(getApplicationContext());
-                            category.id = (int) categoriesDB.insertCategory(category);
-                            categoriesDB.close();
-                            product.category_id = category.id;
-
-                            spinnerCategoriesData.add(category);
-                            spinnerCategoriesData.notifyDataSetChanged();
-                            categoriesSpinner.setSelection(spinnerCategoriesData.getPosition(category));
-                        }
-                        else{
-                            dialog.cancel();
-                        }
-                    }
-                });
-
-                builder.setNegativeButton(R.string.app_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-            }
-        });
-
+        confirmBtn.setText(R.string.app_apply);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,7 +186,7 @@ public class AddProductActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                         }else{
                             Products productsDB = new Products(getApplicationContext());
-                            if(productsDB.insertProduct(product) == -1){
+                            if(productsDB.updateProduct(product) == -1){
                                 Toast.makeText(getApplicationContext(), R.string.error_product_insert, Toast.LENGTH_LONG).show();
                             }
                             productsDB.close();
@@ -277,6 +197,52 @@ public class AddProductActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Departments departmentsDB = new Departments(getApplicationContext());
+        ArrayList<Department> departments = departmentsDB.getDepartments();
+        departmentsDB.close();
+
+        if (departments.size() != 0){
+            final DepartmentSpinnerAdapter spinnerDeptData = new DepartmentSpinnerAdapter(this,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    departments);
+            departmentsSpinner.setAdapter(spinnerDeptData);
+            int index = 0;
+            for(Department dept : departments){
+                if (dept.id == product.department_id){
+                    break;
+                }
+
+                index++;
+            }
+            departmentsSpinner.setSelection(index);
+            Log.i("DEPT INDEX", String.valueOf(index));
+            setBrandAdapter(product.department_id);
+            index = 0;
+            for(Brand brand : brands){
+                if (brand.id == product.brand_id){
+                    break;
+                }
+
+                index++;
+            }
+            brandsSpinner.setSelection(index);
+            Log.i("BRAND INDEX", String.valueOf(index));
+            setCategoryAdapter(product.brand_id);
+            index = 0;
+            for(Category category : categories){
+                if (category.id == product.category_id){
+                    break;
+                }
+                else{
+                    index++;
+                }
+            }
+            categoriesSpinner.setSelection(index);
+            Log.i("CAT INDEX", String.valueOf(index));
+        }else{
+            Toast.makeText(this, R.string.error_departments_loading, Toast.LENGTH_SHORT).show();
+        }
     }
 
     protected ArrayList<Brand> setBrands(int dept_id){
@@ -287,14 +253,6 @@ public class AddProductActivity extends AppCompatActivity {
         return brands;
     }
 
-    protected ArrayList<Category> setCategories(int brand_id){
-        Categories categoriesDB = new Categories(getApplicationContext());
-        ArrayList<Category> categories = categoriesDB.getCategories(brand_id);
-        categoriesDB.close();
-
-        return categories;
-    }
-
     protected int setBrandAdapter(int dept_id){
         brands = setBrands(dept_id);
         spinnerBrandsData = new BrandAdapter(this,
@@ -303,6 +261,14 @@ public class AddProductActivity extends AppCompatActivity {
         brandsSpinner.setAdapter(spinnerBrandsData);
 
         return brands.get(0).id;
+    }
+
+    protected ArrayList<Category> setCategories(int brand_id){
+        Categories categoriesDB = new Categories(getApplicationContext());
+        ArrayList<Category> categories = categoriesDB.getCategories(brand_id);
+        categoriesDB.close();
+
+        return categories;
     }
 
     protected int setCategoryAdapter(int brand_id){

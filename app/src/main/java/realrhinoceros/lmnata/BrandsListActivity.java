@@ -1,18 +1,25 @@
 package realrhinoceros.lmnata;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import realrhinoceros.lmnata.custom_views.HeadPanel;
 import realrhinoceros.lmnata.database.Brands;
+import realrhinoceros.lmnata.database.Departments;
 import realrhinoceros.lmnata.mediators.Brand;
 import realrhinoceros.lmnata.mediators.BrandAdapter;
+import realrhinoceros.lmnata.mediators.Department;
 
 public class BrandsListActivity extends AppCompatActivity {
 
@@ -27,6 +34,16 @@ public class BrandsListActivity extends AppCompatActivity {
         department_id = getIntent().getExtras().getInt("id");
 
         setBrands();
+
+        Departments departments = new Departments(this);
+        Department deptName = departments.getDepartment(department_id);
+        departments.close();
+        String description = getString(R.string.department);
+        HeadPanel headPanel = new HeadPanel(this, deptName.name, description, this);
+        headPanel.setOptionsBtnVisibility(View.GONE);
+
+        LinearLayout linear = (LinearLayout) findViewById(R.id.brandsLinear);
+        linear.addView(headPanel, 0);
     }
 
     @Override

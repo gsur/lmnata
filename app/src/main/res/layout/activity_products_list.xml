@@ -7,85 +7,96 @@
     android:layout_height="match_parent"
     tools:context=".ProductsListActivity">
 
-    <RelativeLayout
-        android:id="@+id/productListLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+    <LinearLayout
+        android:id="@+id/productLinear"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
-            android:id="@+id/searchLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="false"
-            android:layoutDirection="ltr">
-
-            <View
-                android:id="@+id/for_search_focus_hide"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/search_field"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_alignLeft="@+id/search_btn"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentStart="true"
-                android:layout_toLeftOf="@+id/search_btn"
-                android:ems="10"
-                android:hint="@string/add_product_name"
-                android:imeOptions="actionSearch"
-                android:inputType="textPersonName" />
-
-            <ImageButton
-                android:id="@+id/search_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/empty_value"
-                app:srcCompat="@drawable/ic_search" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/no_products_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/searchLayout"
-            android:text="@string/no_products_found"
-            android:textAlignment="center"
-            android:visibility="gone" />
-
-        <ListView
-            android:id="@+id/products_list"
+            android:id="@+id/productListLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/no_products_field"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:headerDividersEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </ListView>
+            <RelativeLayout
+                android:id="@+id/searchLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="false"
+                android:layoutDirection="ltr">
 
-    </RelativeLayout>
+                <View
+                    android:id="@+id/for_search_focus_hide"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/search_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_alignLeft="@+id/search_btn"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="false"
+                    android:layout_toLeftOf="@+id/search_btn"
+                    android:ems="10"
+                    android:hint="@string/add_product_name"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textPersonName" />
+
+                <ImageButton
+                    android:id="@+id/search_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/empty_value"
+                    app:srcCompat="@drawable/ic_search" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/no_products_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchLayout"
+                android:text="@string/no_products_found"
+                android:textAlignment="center"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@+id/products_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/no_products_field"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:headerDividersEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ListView>
+
+        </RelativeLayout>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
